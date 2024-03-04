@@ -1,0 +1,40 @@
+name: "ggt deploy"
+description: "Run a deploy from ggt"
+inputs:
+  app:
+    description: "Which app to deploy to"
+    required: true
+  environment:
+    description: "Which environment to push to and then deploy from"
+    required: true
+  token:
+    description: "The ggt token to use for authentication"
+    required: true
+  allow-issues:
+    description: "Whether to ignore issues and deploy anyway"
+    required: false
+    default: 'false'
+runs:
+  using: "composite"
+  steps:
+    - name: Install ggt
+      run: |
+        npm install -g ggt@experimental
+        ggt version
+      shell: bash
+
+    - name: Deploy to production
+      run: |
+        ggt deploy --app=${{ inputs.app }} --from=${{ inputs.environment }} --force --allow-unknown-directory
+      if: ${{ inputs.allow-issues == 'false'}}
+      shell: bash
+      env:
+        GGT_TOKEN: ${{ inputs.token }}
+
+    - name: Deploy to production allow issues
+      run: |
+        ggt deploy --app=${{ inputs.app }} --from=${{ inputs.environment }} --force --allow-unknown-directory --allow-issues
+      if: ${{ inputs.allow-issues == 'true' }}
+      shell: bash
+      env:
+        GGT_TOKEN: ${{ inputs.token }}
