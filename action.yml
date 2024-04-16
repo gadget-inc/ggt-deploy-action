@@ -19,7 +19,7 @@ runs:
   steps:
     - name: Install ggt
       run: |
-        npm install -g ggt@experimental
+        npm install -g ggt@latest
         ggt version
       shell: bash
 
