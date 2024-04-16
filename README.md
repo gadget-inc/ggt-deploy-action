@@ -29,3 +29,29 @@ with:
     token: ${{ secrets.GGT_TOKEN }}
     allow-issues: 'true'
 ```
+
+# Full Github Action Example
+
+```yaml
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to production
+        uses: gadget-inc/ggt-deploy-action@v1
+        with:
+          app: 'gadget-app'
+          environment: 'development'
+          token: ${{ secrets.GGT_TOKEN }}
+```
