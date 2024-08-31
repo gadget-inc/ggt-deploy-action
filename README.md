@@ -4,8 +4,8 @@ This Github Action is used to deploy a repository to a gadget project's producti
 
 ```yaml
 - name: Deploy to production
-uses: gadget-inc/ggt-deploy-action@v1
-with:
+  uses: gadget-inc/ggt-deploy-action@v1
+  with:
     app: 'gadget-project'
     environment: 'development'
     token: ${{ secrets.GGT_TOKEN }}
@@ -22,8 +22,8 @@ optionally, you can specify `allow-issues` to allow the deployment to continue e
 
 ```yaml
 - name: Deploy to production
-uses: gadget-inc/ggt-deploy-action@v1
-with:
+  uses: gadget-inc/ggt-deploy-action@v1
+  with:
     app: 'gadget-project'
     environment: 'development'
     token: ${{ secrets.GGT_TOKEN }}
