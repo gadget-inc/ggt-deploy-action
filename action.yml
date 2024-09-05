@@ -14,6 +14,14 @@ inputs:
     description: "Whether to ignore issues and deploy anyway"
     required: false
     default: 'false'
+  allow-data-delete:
+    description: "Whether to allow data deletion"
+    required: false
+    default: 'false'
+  allow-charges:
+    description: "Whether to allow incurring charges as part of the deploy"
+    required: false
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -25,16 +33,7 @@ runs:
 
     - name: Deploy to production
       run: |
-        ggt deploy --app=${{ inputs.app }} --from=${{ inputs.environment }} --force --allow-unknown-directory
-      if: ${{ inputs.allow-issues == 'false'}}
-      shell: bash
-      env:
-        GGT_TOKEN: ${{ inputs.token }}
-
-    - name: Deploy to production allow issues
-      run: |
-        ggt deploy --app=${{ inputs.app }} --from=${{ inputs.environment }} --force --allow-unknown-directory --allow-issues
-      if: ${{ inputs.allow-issues == 'true' }}
+        ggt deploy --app=${{ inputs.app }} --from=${{ inputs.environment }} --force --allow-unknown-directory ${{ inputs.allow-issues == 'true' && '--allow-issues' || '' }} ${{ inputs.allow-data-delete == 'true' && '--allow-data-delete' || '' }} ${{ inputs.allow-charges == 'true' && '--allow-charges' || '' }}
       shell: bash
       env:
         GGT_TOKEN: ${{ inputs.token }}
