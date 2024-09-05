@@ -6,8 +6,8 @@ This Github Action is used to deploy a repository to a gadget project's producti
 - name: Deploy to production
   uses: gadget-inc/ggt-deploy-action@v1
   with:
-    app: 'gadget-project'
-    environment: 'development'
+    app: "gadget-project"
+    environment: "development"
     token: ${{ secrets.GGT_TOKEN }}
 ```
 
@@ -18,16 +18,22 @@ This Github Action is used to deploy a repository to a gadget project's producti
 
 `app` is the name of the gadget project who's production will be deployed to.
 
-optionally, you can specify `allow-issues` to allow the deployment to continue even if there are issues on the gadget project.
+You also have the option to configure the following:
+
+- `allow-issues`: allows the deployment to continue even if there are issues on the gadget project. Defaults to `false`.
+- `allow-data-delete`: allows the deployment to continue even if there is data deletion as a result of the deploy. Defaults to `false`.
+- `allow-charges`: allows the deployment to continue even if there are incurred charges on deploy. Defaults to `false`.
 
 ```yaml
 - name: Deploy to production
   uses: gadget-inc/ggt-deploy-action@v1
   with:
-    app: 'gadget-project'
-    environment: 'development'
+    app: "gadget-project"
+    environment: "development"
     token: ${{ secrets.GGT_TOKEN }}
-    allow-issues: 'true'
+    allow-issues: "true"
+    allow-data-delete: "true"
+    allow-charges: "true"
 ```
 
 # Full Github Action Example
@@ -51,7 +57,7 @@ jobs:
       - name: Deploy to production
         uses: gadget-inc/ggt-deploy-action@v1
         with:
-          app: 'gadget-app'
-          environment: 'development'
+          app: "gadget-app"
+          environment: "development"
           token: ${{ secrets.GGT_TOKEN }}
 ```
