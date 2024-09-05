@@ -20,9 +20,11 @@ This Github Action is used to deploy a repository to a gadget project's producti
 
 You also have the option to configure the following:
 
-- `allow-issues`: allows the deployment to continue even if there are issues on the gadget project. Defaults to `false`.
-- `allow-data-delete`: allows the deployment to continue even if there is data deletion as a result of the deploy. Defaults to `false`.
-- `allow-charges`: allows the deployment to continue even if there are incurred charges on deploy. Defaults to `false`.
+- `allow-issues`: allows the deployment to continue even if there are issues on the gadget project.
+- `allow-data-delete`: allows the deployment to continue even if there is data deletion as a result of the deploy.
+- `allow-charges`: allows the deployment to continue even if there are incurred charges on deploy.
+
+All the above defaults to `false`.
 
 ```yaml
 - name: Deploy to production
